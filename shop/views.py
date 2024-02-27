@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from .models import Products
-
+    
 # Create your views here.
 def index(request):
     product_objects = Products.objects.all()
@@ -12,7 +12,7 @@ def index(request):
         product_objects = product_objects.filter(title__icontains=item_name)
 
     # Paginator Code
-    paginator = Paginator(product_objects, 3) # Show 4 products per page
+    paginator = Paginator(product_objects, 3)
     page = request.GET.get('page')
     product_objects = paginator.get_page(page)
     
@@ -20,3 +20,12 @@ def index(request):
         'product_objects': product_objects
     }
     return render(request, 'shop/index.html', context)
+
+
+def detail(request, id):
+    product_object = Products.objects.get(id=id)
+    context = {
+        'product_object': product_object
+    }
+    return render(request,'shop/detail.html', context)
+
