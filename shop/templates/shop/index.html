@@ -79,6 +79,12 @@
     if (localStorage.getItem('cart')==null){
         var cart = {};
     }
+    else{
+        cart = JSON.parse(localStorage.getItem('cart'));
+    }
 
+    $(document).on('click' , '.atc', function(){
+        console.log("the add to cart button has been clicked");
+    });
 </script>
 </body>
